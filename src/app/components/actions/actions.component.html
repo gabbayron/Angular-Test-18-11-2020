@@ -1,0 +1,40 @@
+<div class="content">
+    <h1 class="mat-display-2">Hello Banker</h1>
+    <h1 class="mat-display-1">Here you can make all your banking actions</h1>
+    <div class="example-container">
+        <div class="example-container">
+            <h1 style="margin-bottom: 30px;">{{msg}}</h1>
+            <form [formGroup]="myForm">
+                <mat-form-field appearance="fill">
+                    <mat-label>Bank Account Number</mat-label>
+                    <input formControlName="account_number" matInput>
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Amount</mat-label>
+                    <input type="number" formControlName="amount" matInput>
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Action</mat-label>
+                    <mat-select [(ngModel)]="selectedAction" formControlName="action">
+                        <mat-option *ngFor="let action of actions" [value]="action">{{action}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field *ngIf="selectedAction ==='Loan'" appearance="fill">
+                    <mat-label>Number Of Payments</mat-label>
+                    <input type="number" formControlName="payments" matInput>
+                </mat-form-field>
+                <br>
+                <mat-form-field *ngIf="selectedAction ==='Loan'" appearance="fill">
+                    <mat-label>Intrest %</mat-label>
+                    <input type="number" formControlName="intrest" matInput>
+                </mat-form-field>
+            </form>
+            <button (click)="handleClick()" [disabled]="myForm.invalid" mat-raised-button color="accent">Make
+                Action</button>
+        </div>
+    </div>
+</div>

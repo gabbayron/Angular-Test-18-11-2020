@@ -1,0 +1,45 @@
+<div class="content">
+
+    <h1 style="text-align: center;" class="mat-display-2">Hello Banker! Welcome To Your Bank Account Managing App</h1>
+    <h1 style="margin:10px">{{msg}}</h1>
+
+    <mat-form-field class="example-form-field">
+
+        <mat-label>Enter Account Number</mat-label>
+        <input matInput type="text" [(ngModel)]="accountNumber">
+        <button mat-button *ngIf="accountNumber" matSuffix mat-icon-button aria-label="Clear"
+            (click)="accountNumber=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <button style="margin: 20px;" [disabled]="accountNumber=== '' " (click)="handleClick(accountNumber)"
+        mat-raised-button color="accent">Find
+        Account
+    </button>
+    <button [disabled]="accountService.account.length ==0" style="margin: 20px;" (click)="handleClear()"
+        mat-raised-button color="warn">
+        Clear
+    </button>
+
+    <div class="account">
+        <mat-card *ngFor="let action of accountService.account" class="example-card card">
+            <mat-card-header style="width: 100%;">
+                <mat-card-title><b>Action :</b> {{action.action}}</mat-card-title>
+                <div mat-card-avatar class="example-header-image">
+                    <mat-icon *ngIf="action.action == 'Deposit'">attach_money</mat-icon>
+                    <mat-icon *ngIf="action.action == 'Withdraw'">remove</mat-icon>
+                    <mat-icon *ngIf="action.action == 'Loan'">sentiment_very_dissatisfied</mat-icon>
+                </div>
+
+
+            </mat-card-header>
+            <mat-card-content>
+                <h3><b>Amount</b> {{action.amount}} $</h3>
+                <h3><b>Date :</b> {{action.date | date : "medium"}}</h3>
+                <h3 *ngIf='action.intrest'><b> Intrest :</b> {{action.intrest}}%</h3>
+                <h3 *ngIf='action.payments'> <b>Payments :</b> {{action.payments}}</h3>
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+</div>

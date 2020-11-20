@@ -1,0 +1,23 @@
+CREATE DATABASE bankAccounts;
+USE bankAccounts;
+
+CREATE TABLE account_operations(
+	id int auto_increment,
+    account_number varchar(255) not null,
+    action varchar(255) not null,
+    amount int,
+    date datetime default now(),
+    payments int default(0),
+    intrest int default(0),
+    primary key(id)
+);
+
+INSERT INTO account_operations(account_number,action,amount,payments,intrest)
+values(2809133,"Deposit",100,0,0),
+(2809133,"Deposit",300,0,0),
+(138923,"Deposit",150,0,0),
+(138923,"Withdraw",100,0,0),
+(138923,"Loan",200,1,3),
+(45555,"Loan",200,1,3),
+(45555,"Deposit",200,0,0),
+(45555,"Withdraw",200,0,0);
